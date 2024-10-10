@@ -1,0 +1,81 @@
+.custom-button {
+  --bgColor: var(--accent-color);
+
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  appearance: none;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 8px;
+  border-radius: 1000px;
+  background: var(--bgColor);
+  font-size: 12px;
+  font-weight: 500;
+  outline: none;
+  border: none;
+
+  transition: 0.15s ease-in-out;
+
+  &:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--bgColor) 100%,
+      var(--white-color) 25%
+    );
+  }
+
+  &:active {
+    scale: 0.95;
+  }
+
+  &:disabled {
+    cursor: default;
+    background-color: gray;
+  }
+
+  &.small {
+    min-width: 30px;
+    height: 30px;
+  }
+
+  &.very-small {
+    min-width: 20px;
+    height: 20px;
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--bgColor);
+
+    &:hover {
+      background-color: var(--bgColor);
+      color: var(--white-color);
+    }
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px var(--white-color);
+  }
+
+  // Colors
+  &.ghost {
+    border: none;
+    background-color: transparent;
+
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--line-color) 15%,
+        transparent 0%
+      );
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--accent-color);
+    }
+  }
+}

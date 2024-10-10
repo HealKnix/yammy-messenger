@@ -1,0 +1,59 @@
+.custom-input-wrapper {
+  --accentInput: var(--accent-color);
+
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  width: 100%;
+  background-color: var(--input-color);
+  border: 0px solid transparent;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 100px;
+  transition: 0.15s ease-in-out;
+
+  &:has(input:focus) {
+    background-color: color-mix(
+      in srgb,
+      var(--input-color) 100%,
+      var(--accentInput) 15%
+    );
+    box-shadow: 0 0 0 2px var(--accentInput);
+  }
+
+  &:has(.custom-input:focus) > .divider-content {
+    color: var(--accentInput);
+
+    & > svg {
+      stroke: var(--accentInput);
+    }
+  }
+}
+
+.custom-input {
+  flex: 1;
+  appearance: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  height: 45px;
+  font-size: 14px;
+  padding: 0 10px;
+
+  &:focus::placeholder {
+    color: color-mix(in srgb, var(--accentInput) 25%, var(--gray-color) 100%);
+  }
+
+  &::placeholder {
+    color: var(--gray-color);
+  }
+}
+
+.divider-content {
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  transition: 0.15s ease-in-out;
+}

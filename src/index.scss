@@ -1,0 +1,95 @@
+@import url('assets/fonts/fonts.scss');
+@import url('assets/colors.scss');
+
+* {
+  flex: none;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--white-color);
+  font-family:
+    DM Sans,
+    sans-serif;
+  list-style: none;
+  text-decoration: none;
+
+  // box-shadow: 0 0 0 0.5px #ffffff33;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+}
+
+html,
+body,
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--dark-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 800px;
+}
+
+h1 {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+span {
+  display: block;
+
+  // Subtitle
+  &.subtitle-3 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  &.subtitle-2 {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  &.subtitle-1 {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  // Description
+  &.description-1 {
+    font-size: 12px;
+    font-weight: normal;
+  }
+  &.description-2 {
+    font-size: 10px;
+    font-weight: normal;
+  }
+  // Body text
+  &.body-text-1 {
+    font-size: 16px;
+    font-weight: normal;
+  }
+  &.body-text-2 {
+    font-size: 14px;
+    font-weight: normal;
+  }
+}

@@ -1,0 +1,11 @@
+.mobile-mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 355px;
+  height: 765px;
+  border-radius: 30px;
+  border: 1px solid
+    color-mix(in srgb, var(--gray-color) 100%, var(--dark-color) 100%);
+  overflow: hidden;
+}

@@ -1,0 +1,120 @@
+.conversation__wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 15px 25px;
+  background-color: rgba(9, 7, 16, 0.85);
+  backdrop-filter: blur(32px);
+  z-index: 10;
+}
+
+.main {
+  padding: 10px 0;
+
+  & > * {
+    padding: 0 25px;
+  }
+}
+
+.user {
+  display: flex;
+  gap: 10px;
+
+  &-avatar {
+    width: 42px;
+    height: 42px;
+    background-color: var(--input-color);
+    border-radius: 50%;
+  }
+  &-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+  }
+  &-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--mint-color);
+  }
+}
+
+.message__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  &-blob {
+    background-color: var(--input-color);
+    padding: 12px;
+    border-radius: 1px 12px 12px 12px;
+    max-width: 300px;
+  }
+
+  &.own {
+    align-items: end;
+  }
+  &.own &-blob {
+    background-color: var(--accent-color);
+    border-radius: 12px 12px 1px 12px;
+  }
+}
+
+.send-message__wrapper {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  max-height: 250px;
+  background-color: rgba(9, 7, 16, 0.85);
+  backdrop-filter: blur(32px);
+  padding: 15px 25px;
+}
+
+.send-message {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 45px;
+  background-color: var(--input-color);
+  padding-right: 3px;
+  border-radius: 25px;
+  transition: 0.15s ease-in-out;
+
+  &:has(&-text:focus-visible) {
+    box-shadow: 0 0 0 1px var(--accent-color);
+  }
+
+  &-text {
+    cursor: text;
+    flex: 1;
+    height: 100%;
+    max-height: 200px;
+    appearance: none;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    padding: 8px 15px;
+    padding-right: 3px;
+    border-radius: 25px 0 0 25px;
+    overflow: auto;
+  }
+}
