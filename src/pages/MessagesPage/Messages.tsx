@@ -15,7 +15,9 @@ const Messages: FC<MessagesProps> = () => {
 
   return (
     <motion.div
-      initial={{ x: '100%' }}
+      initial={{
+        x: '100%',
+      }}
       animate={{
         x: 0,
         transition: {

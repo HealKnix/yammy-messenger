@@ -1,0 +1,297 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "phone": "+79999999999",
+      "email": "test@mail.com",
+      "password": "test",
+      "first_name": "Тест",
+      "last_name": "Тестов",
+      "patronymic": "Тестович",
+      "username": "test",
+      "sessionid": "mock1",
+      "csrftoken": "mock1"
+    },
+    {
+      "id": 2,
+      "phone": "+79668970448",
+      "email": "user5156@mail.com",
+      "password": "password2",
+      "first_name": "Иван",
+      "last_name": "Смирнов",
+      "patronymic": "Александрович",
+      "username": "user2",
+      "sessionid": "mock2",
+      "csrftoken": "mock2"
+    },
+    {
+      "id": 3,
+      "phone": "+79225252035",
+      "email": "user9413@example.com",
+      "password": "password3",
+      "first_name": "Анна",
+      "last_name": "Дубинина",
+      "patronymic": "Сергеевна",
+      "username": "user3",
+      "sessionid": "mock3",
+      "csrftoken": "mock3"
+    },
+    {
+      "id": 4,
+      "phone": "+79528225279",
+      "email": "user5869@test.org",
+      "password": "password4",
+      "first_name": "Игорь",
+      "last_name": "Сидоров",
+      "patronymic": "Алексеевич",
+      "username": "user4",
+      "sessionid": "mock4",
+      "csrftoken": "mock4"
+    },
+    {
+      "id": 5,
+      "phone": "+79287904082",
+      "email": "user2735@test.org",
+      "password": "password5",
+      "first_name": "Денис",
+      "last_name": "Сырков",
+      "patronymic": "Данилович",
+      "username": "user5",
+      "sessionid": "mock6",
+      "csrftoken": "mock6"
+    },
+    {
+      "id": 6,
+      "phone": "+79925486484",
+      "email": "user1049@example.com",
+      "password": "password6",
+      "first_name": "Ольга",
+      "last_name": "Колыгина",
+      "patronymic": "Денисовна",
+      "username": "user6",
+      "sessionid": "mock6",
+      "csrftoken": "mock6"
+    }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "friend_id": 5
+    },
+    {
+      "id": 2,
+      "user_id": 5,
+      "friend_id": 1
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "friend_id": 1
+    },
+    {
+      "id": 4,
+      "user_id": 4,
+      "friend_id": 1
+    },
+    {
+      "id": 5,
+      "user_id": 1,
+      "friend_id": 5
+    }
+  ],
+  "friend_invites": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "friend_id": 3,
+      "status": "Deny"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "friend_id": 5,
+      "status": "Accept"
+    },
+    {
+      "id": 3,
+      "user_id": 5,
+      "friend_id": 1,
+      "status": "Deny"
+    },
+    {
+      "id": 4,
+      "user_id": 2,
+      "friend_id": 1,
+      "status": "Accept"
+    },
+    {
+      "id": 5,
+      "user_id": 1,
+      "friend_id": 1,
+      "status": "Accept"
+    }
+  ],
+  "conversations": [
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "peers": [
+    {
+      "id": 1,
+      "conversation_id": 3,
+      "user_id": 2
+    },
+    {
+      "id": 2,
+      "conversation_id": 5,
+      "user_id": 1
+    },
+    {
+      "id": 3,
+      "conversation_id": 3,
+      "user_id": 2
+    },
+    {
+      "id": 4,
+      "conversation_id": 1,
+      "user_id": 2
+    },
+    {
+      "id": 5,
+      "conversation_id": 3,
+      "user_id": 3
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "content": "Sample content 67",
+      "user_id": 5,
+      "conversation_id": 3
+    },
+    {
+      "id": 2,
+      "content": "Sample content 45",
+      "user_id": 2,
+      "conversation_id": 5
+    },
+    {
+      "id": 3,
+      "content": "Sample content 93",
+      "user_id": 4,
+      "conversation_id": 2
+    },
+    {
+      "id": 4,
+      "content": "Sample content 61",
+      "user_id": 4,
+      "conversation_id": 2
+    },
+    {
+      "id": 5,
+      "content": "Sample content 3",
+      "user_id": 3,
+      "conversation_id": 2
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "user_id": 2,
+      "content": "Sample content 63"
+    },
+    {
+      "id": 2,
+      "user_id": 2,
+      "content": "Sample content 31"
+    },
+    {
+      "id": 3,
+      "user_id": 1,
+      "content": "Sample content 26"
+    },
+    {
+      "id": 4,
+      "user_id": 1,
+      "content": "Sample content 64"
+    },
+    {
+      "id": 5,
+      "user_id": 5,
+      "content": "Sample content 70"
+    }
+  ],
+  "liked_posts": [
+    {
+      "id": 1,
+      "user_id": 3,
+      "post_id": 5
+    },
+    {
+      "id": 2,
+      "user_id": 3,
+      "post_id": 2
+    },
+    {
+      "id": 3,
+      "user_id": 3,
+      "post_id": 5
+    },
+    {
+      "id": 4,
+      "user_id": 3,
+      "post_id": 4
+    },
+    {
+      "id": 5,
+      "user_id": 2,
+      "post_id": 5
+    }
+  ],
+  "post_comments": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "post_id": 4,
+      "content": "Sample content 91"
+    },
+    {
+      "id": 2,
+      "user_id": 4,
+      "post_id": 2,
+      "content": "Sample content 89"
+    },
+    {
+      "id": 3,
+      "user_id": 2,
+      "post_id": 2,
+      "content": "Sample content 89"
+    },
+    {
+      "id": 4,
+      "user_id": 5,
+      "post_id": 4,
+      "content": "Sample content 88"
+    },
+    {
+      "id": 5,
+      "user_id": 4,
+      "post_id": 4,
+      "content": "Sample content 27"
+    }
+  ]
+}

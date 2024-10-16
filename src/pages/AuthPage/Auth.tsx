@@ -2,11 +2,14 @@ import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { api } from '@/api';
 import Button from '@/components/ui/Button/Button';
+import { useAuthStore } from '@/store/useAuthStore';
 
 import styles from './Auth.module.scss';
 
 const Auth: FC = () => {
+  const authStore = useAuthStore();
   const navigate = useNavigate();
 
   return (
@@ -40,7 +43,17 @@ const Auth: FC = () => {
           <Button outlined onClick={() => navigate('/sign-up')}>
             Sign Up
           </Button>
-          <Button>Login</Button>
+          <Button
+            onClick={async () => {
+              const user = await api.login('user5156@mail.com', 'password1');
+
+              if (user) {
+                authStore.setUser(user);
+              }
+            }}
+          >
+            Login
+          </Button>
         </div>
 
         <span className={`description-2 ${styles['description-2']}`}>

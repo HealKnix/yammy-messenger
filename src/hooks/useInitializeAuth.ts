@@ -9,7 +9,9 @@ export const useInitializeAuth = () => {
     queryKey: ['auth'],
     queryFn: () =>
       api.auth().then((res) => {
-        authStore.setUser(res);
+        if (res) {
+          authStore.setUser(res);
+        }
         return res;
       }),
   });

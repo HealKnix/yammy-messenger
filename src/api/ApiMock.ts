@@ -1,7 +1,6 @@
 import axios from 'axios';
 import Cookies from 'cookies-ts';
 
-import { userList } from '@/models/mock/user';
 import { SignUpUser, User } from '@/models/User';
 
 import { ApiNames, ApiType } from './ApiType';
@@ -12,9 +11,9 @@ const DELAY = 1000; // Задержка 1 секунда
 const DELAY_DIFF = 500;
 
 // Возвращает переданные данные с заданной задержкой
-async function delayRes<T>(data: T, delay: number): Promise<T> {
+async function delayRes<T>(data: T): Promise<T> {
   await new Promise((res) => {
-    setTimeout(res, Math.random() * (delay + DELAY_DIFF) + delay - DELAY_DIFF);
+    setTimeout(res, Math.random() * (DELAY + DELAY_DIFF) + DELAY - DELAY_DIFF);
   });
   return data;
 }
@@ -25,157 +24,101 @@ export class ApiMock implements ApiType {
   }
 
   async signUp(form: SignUpUser) {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.email === form.email &&
-        user.password === form.password &&
-        user.phone === form.phone
-      );
-    });
+    const { data: users } = await axios.get<User[]>('users');
 
-    if (userList[userId]) return await delayRes(null, DELAY);
+    const { data } = await axios
+      .post<User>('users', {
+        id: users.length + 1,
+        sessionid: `mock${users.length + 1}`,
+        csrftoken: `mock${users.length + 1}`,
+        ...form,
+      })
+      .then((res) => {
+        if (res.data) {
+          cookies.set('sessionid', res.data.sessionid);
+          cookies.set('csrftoken', res.data.csrftoken);
+        }
 
-    const data = await delayRes<{
-      sessionid: string;
-      csrftoken: string;
-      user: User;
-    }>(
-      {
-        csrftoken: 'mockSignUp',
-        sessionid: 'mockSignUp',
-        user: {
-          ...form,
-          id: 999,
-        },
-      },
-      DELAY,
-    );
+        return res;
+      });
 
-    cookies.set('csrftoken', data.csrftoken);
-    cookies.set('sessionid', data.sessionid);
-
-    return data;
+    return delayRes(data);
   }
 
   async login(email: string, password: string) {
-    const userId = userList.findIndex((user) => {
-      return user.email === email && user.password === password;
-    });
+    const { data } = await axios
+      .get<User[]>(`users?email=${email}&password=${password}`)
+      .then((res) => {
+        if (res.data[0]) {
+          console.log(res);
 
-    if (!userList[userId]) return await delayRes(null, DELAY);
+          cookies.set('csrftoken', res.data[0].csrftoken);
+          cookies.set('sessionid', res.data[0].sessionid);
+        }
 
-    const data = await delayRes(
-      {
-        csrftoken: userList[userId].csrftoken ?? 'mock',
-        sessionid: userList[userId].sessionid ?? 'mock',
-        user: userList[userId],
-      },
-      DELAY,
-    );
+        return res;
+      });
 
-    cookies.set('csrftoken', data.csrftoken);
-    cookies.set('sessionid', data.sessionid);
-
-    return data;
+    return delayRes(data[0]);
   }
 
   async logout() {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
-
-    if (userList[userId]) {
-      cookies.remove('csrftoken');
-      cookies.remove('sessionid');
-    }
+    await axios
+      .get<
+        User[]
+      >(`users?csrftoken=${cookies.get('csrftoken')}&sessionid=${cookies.get('sessionid')}`)
+      .then((res) => {
+        if (res.data[0]) {
+          cookies.remove('csrftoken');
+          cookies.remove('sessionid');
+        }
+      });
   }
 
   async auth() {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
+    const { data } = await axios
+      .get<
+        User[]
+      >(`users?csrftoken=${cookies.get('csrftoken')}&sessionid=${cookies.get('sessionid')}`)
+      .then((res) => {
+        if (!res.data[0]) {
+          cookies.remove('csrftoken');
+          cookies.remove('sessionid');
+        }
 
-    if (!userList[userId]) return await delayRes(null, DELAY);
+        return res;
+      });
 
-    const data = await delayRes(userList[userId], DELAY);
-
-    return data;
+    return delayRes(data[0]);
   }
 
   async get<T>(apiName: ApiNames) {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
+    const { data } = await axios.get<T[]>(apiName);
 
-    if (!userList[userId]) return await delayRes([], DELAY);
-
-    const data = await delayRes([], DELAY);
-
-    return data;
+    return delayRes(data);
   }
 
   async getById<T>(apiName: ApiNames, id: number | null) {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
+    const { data } = await axios.get<T>(`${apiName}/${id}`);
 
-    if (!userList[userId] || !id) return await delayRes(null, DELAY);
-
-    const data = await delayRes(null, DELAY);
-
-    return data;
+    return delayRes(data);
   }
 
   async post<T>(apiName: ApiNames, dataBody: T) {
-    const { data } = await axios.post<T>(`/api/v1/${apiName}/`, dataBody, {
-      withCredentials: true,
-      headers: {
-        'X-CSRFToken': cookies.get('csrftoken'),
-      },
-    });
+    const { data } = await axios.post<T>(apiName, dataBody);
 
-    return data;
+    return delayRes(data);
   }
 
   async update<T>(apiName: ApiNames, id: number | null, dataBody: T) {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
+    const { data } = await axios.patch<T>(`${apiName}/${id}`, dataBody);
 
-    if (!userList[userId] || !id) return await delayRes(null, DELAY);
-
-    const data = await delayRes(null, DELAY);
-
-    return data;
+    return delayRes(data);
   }
 
   async delete<T>(apiName: ApiNames, id: number | null) {
-    const userId = userList.findIndex((user) => {
-      return (
-        user.sessionid === cookies.get('sessionid') &&
-        user.csrftoken === cookies.get('csrftoken')
-      );
-    });
+    const { data } = await axios.delete<T>(`${apiName}/${id}`);
 
-    if (!userList[userId] || !id) return await delayRes(null, DELAY);
-
-    const data = await delayRes(null, DELAY);
-
-    return data;
+    return delayRes(data);
   }
 }

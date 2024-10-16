@@ -327,7 +327,7 @@ const SignUpPageInfo: FC<SignUpPageProps> = ({ form, handleForm, setPage }) => {
           });
 
           if (userData) {
-            authStore.setUser(userData.user);
+            authStore.setUser(userData);
           }
         }}
         className={styles['form']}

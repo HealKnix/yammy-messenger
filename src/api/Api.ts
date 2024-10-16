@@ -13,32 +13,36 @@ export class Api implements ApiType {
   }
 
   async signUp(form: SignUpUser) {
-    const { data } = await axios.post<{
-      sessionid: string;
-      csrftoken: string;
-      user: User;
-    }>('/login/', {
-      ...form,
-    });
+    const { data } = await axios
+      .post<User>('/login/', {
+        ...form,
+      })
+      .then((res) => {
+        if (res.data) {
+          cookies.set('csrftoken', data.csrftoken);
+          cookies.set('sessionid', data.sessionid);
+        }
 
-    cookies.set('csrftoken', data.csrftoken);
-    cookies.set('sessionid', data.sessionid);
+        return res;
+      });
 
     return data;
   }
 
   async login(email: string, password: string) {
-    const { data } = await axios.post<{
-      sessionid: string;
-      csrftoken: string;
-      user: User;
-    }>('/login/', {
-      email: email,
-      password: password,
-    });
+    const { data } = await axios
+      .post<User>('/login/', {
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        if (res.data) {
+          cookies.set('csrftoken', data.csrftoken);
+          cookies.set('sessionid', data.sessionid);
+        }
 
-    cookies.set('csrftoken', data.csrftoken);
-    cookies.set('sessionid', data.sessionid);
+        return res;
+      });
 
     return data;
   }
