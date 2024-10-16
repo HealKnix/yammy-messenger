@@ -50,8 +50,6 @@ export class ApiMock implements ApiType {
       .get<User[]>(`users?email=${email}&password=${password}`)
       .then((res) => {
         if (res.data[0]) {
-          console.log(res);
-
           cookies.set('csrftoken', res.data[0].csrftoken);
           cookies.set('sessionid', res.data[0].sessionid);
         }
