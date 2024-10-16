@@ -45,7 +45,7 @@ const Auth: FC = () => {
           </Button>
           <Button
             onClick={async () => {
-              const user = await api.login('user5156@mail.com', 'password1');
+              const user = await api.login('test@mail.com', 'test');
 
               if (user) {
                 authStore.setUser(user);
